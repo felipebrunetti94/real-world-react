@@ -17,6 +17,7 @@
 /**
  * @typedef UserRepository
  * @property {(userInfo: UserAuthInfo) => Promise<User>} add
+ * @property {(userInfo: UserAuthInfo) => Promise<User>} authBy
  */
 
 export default {};
