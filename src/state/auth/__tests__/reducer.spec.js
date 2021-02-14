@@ -31,7 +31,7 @@ describe("State :: Auth :: Reducer", () => {
   describe("when Register User", () => {
     it("update loading and errors", () => {
       const action = {
-        type: AUTH.REGISTER_USER,
+        type: AUTH.REGISTER_USER_REQUEST,
       };
       const state = {
         isLoading: false,
@@ -48,7 +48,7 @@ describe("State :: Auth :: Reducer", () => {
   describe("when Login User", () => {
     it("update loading and errors", () => {
       const action = {
-        type: AUTH.REGISTER_USER,
+        type: AUTH.REGISTER_USER_REQUEST,
       };
       const state = {
         isLoading: false,
@@ -65,7 +65,7 @@ describe("State :: Auth :: Reducer", () => {
   describe("when Register User error", () => {
     it("disable loading and update errors", () => {
       const action = {
-        type: AUTH.REGISTER_USER_ERROR,
+        type: AUTH.REGISTER_USER_REQUEST_ERROR,
         errors: ["ohno!"],
       };
       const state = {
@@ -83,7 +83,7 @@ describe("State :: Auth :: Reducer", () => {
   describe("when Login User error", () => {
     it("disable loading, update errors and remove password", () => {
       const action = {
-        type: AUTH.LOGIN_USER_ERROR,
+        type: AUTH.LOGIN_USER_REQUEST_ERROR,
         errors: ["ohno!"],
       };
       const state = {
@@ -109,7 +109,7 @@ describe("State :: Auth :: Reducer", () => {
   describe("when Register User Success", () => {
     it("disable loading and errors", () => {
       const action = {
-        type: AUTH.REGISTER_USER_SUCCESS,
+        type: AUTH.REGISTER_USER_REQUEST_SUCCESS,
       };
       const state = {
         isLoading: true,
@@ -130,7 +130,7 @@ describe("State :: Auth :: Reducer", () => {
   describe("when Login User Success", () => {
     it("disable loading and errors", () => {
       const action = {
-        type: AUTH.LOGIN_USER_SUCCESS,
+        type: AUTH.LOGIN_USER_REQUEST_SUCCESS,
       };
       const state = {
         isLoading: true,
