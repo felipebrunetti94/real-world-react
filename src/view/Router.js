@@ -17,14 +17,14 @@ const Router = () => {
     <BrowserRouter>
       <Layout>
         <Switch>
-          <Route path="/" component={HomePage} />
-          <PublicOnlyRoute path="/login" component={LoginPage} />
-          <PublicOnlyRoute path="/register" component={RegisterPage} />
-          <PrivateOnlyRoute path="/editor" component={EditorPage} />
-          <PrivateOnlyRoute path="/editor/:slug" component={EditorPage} />
-          <Route path="/article/:slug" component={ArticlePage} />
-          <Route path="/@:username" component={ProfilePage} />
-          <PrivateOnlyRoute path="/settings" component={SettingsPage} />
+          <Route exact path="/" component={HomePage} />
+          <PublicOnlyRoute exact path="/login" component={LoginPage} />
+          <PublicOnlyRoute exact path="/register" component={RegisterPage} />
+          <PrivateOnlyRoute exact path="/editor" component={EditorPage} />
+          <PrivateOnlyRoute exact path="/editor/:slug" component={EditorPage} />
+          <Route exact path="/article/:slug" component={ArticlePage} />
+          <Route exact path="/@:username" component={ProfilePage} />
+          <PrivateOnlyRoute exact path="/settings" component={SettingsPage} />
           <Redirect to="/" />
         </Switch>
       </Layout>
