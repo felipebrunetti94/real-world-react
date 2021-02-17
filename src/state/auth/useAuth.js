@@ -1,20 +1,30 @@
-import { useReducer, createContext, useContext, useMemo } from "react";
+import {
+  useReducer,
+  createContext,
+  useContext,
+  useMemo,
+  useEffect,
+} from "react";
 import initialState from "./initialState";
 import * as AUTH from "./types";
 import reducer from "./reducer";
 
 const AuthContext = createContext(null);
 
-export const AuthProvider = ({
-  children,
-  registerUser,
-  loginUser,
-  storage,
-}) => {
-  const [state, dispatch] = useReducer(
-    reducer,
-    storage.user ? storage : initialState
-  );
+const AUTH_KEY = "AUTH";
+
+export const AuthProvider = ({ children, registerUser, loginUser, cache }) => {
+  const [state, dispatch] = useReducer(reducer, initialState, (init) => {
+    const stored = cache.get(AUTH_KEY);
+    if (stored) {
+      return { ...init, user: stored };
+    }
+    return init;
+  });
+
+  useEffect(() => {
+    cache.set(AUTH_KEY, state.user);
+  }, [state, cache]);
 
   const value = useMemo(() => {
     const onRegisterUser = (authInfo) => {
@@ -22,8 +32,8 @@ export const AuthProvider = ({
       return registerUser(authInfo, {
         onSuccess: (user) =>
           dispatch({ type: AUTH.REGISTER_USER_REQUEST_SUCCESS, user }),
-        onError: (errors) =>
-          dispatch({ type: AUTH.REGISTER_USER_REQUEST_ERROR, errors }),
+        onError: (error) =>
+          dispatch({ type: AUTH.REGISTER_USER_REQUEST_ERROR, error }),
       });
     };
 
@@ -32,20 +42,26 @@ export const AuthProvider = ({
       return loginUser(authInfo, {
         onSuccess: (user) =>
           dispatch({ type: AUTH.LOGIN_USER_REQUEST_SUCCESS, user }),
-        onError: (errors) =>
-          dispatch({ type: AUTH.LOGIN_USER_REQUEST_ERROR, errors }),
+        onError: (error) =>
+          dispatch({ type: AUTH.LOGIN_USER_REQUEST_ERROR, error }),
       });
     };
 
     const updateAuthInfo = (authInfo) =>
       dispatch({ type: AUTH.UPDATE_AUTH_INFO, authInfo });
 
+    const onSignOut = () => {
+      dispatch({ type: AUTH.SIGN_OUT });
+      cache.clear(AUTH_KEY);
+    };
+
     return {
       ...state,
-      user: state.user || {},
+      loggedIn: !!state.user.token,
       updateAuthInfo,
       onRegisterUser,
       onUserLogin,
+      onSignOut,
     };
   }, [state, dispatch, registerUser, loginUser]);
 
