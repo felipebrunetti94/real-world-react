@@ -3,13 +3,11 @@ import ReactDOM from "react-dom";
 import App from "./view/App";
 import reportWebVitals from "./reportWebVitals";
 import * as container from "./container";
-
-const getInitialState = () => ({});
-const storage = getInitialState();
+import cache from "./infra/cache";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App storage={storage} container={container} />
+    <App cache={cache} container={container} />
   </React.StrictMode>,
   document.getElementById("root")
 );

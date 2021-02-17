@@ -3,9 +3,9 @@
 import Provider from "./Provider";
 import Router from "./Router";
 
-const App = ({ container, storage }) => {
+const App = ({ container, cache }) => {
   return (
-    <Provider storage={storage} container={container}>
+    <Provider cache={cache} container={container}>
       <Router />
     </Provider>
   );
