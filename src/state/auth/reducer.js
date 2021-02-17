@@ -15,7 +15,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         isLoading: true,
-        error: [],
+        error: {},
       };
     case AUTH.REGISTER_USER_REQUEST_ERROR:
       return {
@@ -38,7 +38,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         authInfo: {},
-        error: [],
+        error: {},
         isLoading: false,
         user: action.user,
       };

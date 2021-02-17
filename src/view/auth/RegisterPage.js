@@ -4,7 +4,7 @@ import AuthPage from "./AuthPage";
 import { Link } from "react-router-dom";
 import useAuth from "../../state/auth/useAuth";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const {
     onRegisterUser,
     error,
@@ -26,4 +26,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

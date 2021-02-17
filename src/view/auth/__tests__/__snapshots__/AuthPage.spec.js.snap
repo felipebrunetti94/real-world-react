@@ -25,10 +25,6 @@ exports[`View :: Auth :: AuthPage matches snapshot 1`] = `
             link
           </span>
         </p>
-        <ul
-          class="error-messages"
-          data-testid="errors"
-        />
         <form>
           <fieldset
             class="form-group"

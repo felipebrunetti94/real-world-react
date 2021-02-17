@@ -35,12 +35,12 @@ describe("State :: Auth :: Reducer", () => {
       };
       const state = {
         isLoading: false,
-        errors: ["ohno!"],
+        error: { message: "ohno!" },
       };
 
       expect(reducer(state, action)).toEqual({
         isLoading: true,
-        errors: [],
+        error: {},
       });
     });
   });
@@ -52,12 +52,12 @@ describe("State :: Auth :: Reducer", () => {
       };
       const state = {
         isLoading: false,
-        errors: ["ohno!"],
+        error: "ohno!",
       };
 
       expect(reducer(state, action)).toEqual({
         isLoading: true,
-        errors: [],
+        error: {},
       });
     });
   });
@@ -66,16 +66,16 @@ describe("State :: Auth :: Reducer", () => {
     it("disable loading and update errors", () => {
       const action = {
         type: AUTH.REGISTER_USER_REQUEST_ERROR,
-        errors: ["ohno!"],
+        error: { message: "ohno!" },
       };
       const state = {
         isLoading: true,
-        errors: [],
+        error: {},
       };
 
       expect(reducer(state, action)).toEqual({
         isLoading: false,
-        errors: ["ohno!"],
+        error: { message: "ohno!" },
       });
     });
   });
@@ -84,11 +84,11 @@ describe("State :: Auth :: Reducer", () => {
     it("disable loading, update errors and remove password", () => {
       const action = {
         type: AUTH.LOGIN_USER_REQUEST_ERROR,
-        errors: ["ohno!"],
+        error: { message: "ohno!" },
       };
       const state = {
         isLoading: true,
-        errors: [],
+        error: {},
         authInfo: {
           password: "password",
           username: "username",
@@ -97,7 +97,7 @@ describe("State :: Auth :: Reducer", () => {
 
       expect(reducer(state, action)).toEqual({
         isLoading: false,
-        errors: ["ohno!"],
+        error: { message: "ohno!" },
         authInfo: {
           username: "username",
           password: "",
@@ -113,7 +113,7 @@ describe("State :: Auth :: Reducer", () => {
       };
       const state = {
         isLoading: true,
-        errors: ["ohno!"],
+        error: { message: "error" },
         authInfo: {
           key: "value",
         },
@@ -121,7 +121,7 @@ describe("State :: Auth :: Reducer", () => {
 
       expect(reducer(state, action)).toEqual({
         isLoading: false,
-        errors: [],
+        error: {},
         authInfo: {},
       });
     });
@@ -134,7 +134,7 @@ describe("State :: Auth :: Reducer", () => {
       };
       const state = {
         isLoading: true,
-        errors: ["ohno!"],
+        error: { message: "ohno!" },
         authInfo: {
           key: "value",
         },
@@ -142,7 +142,7 @@ describe("State :: Auth :: Reducer", () => {
 
       expect(reducer(state, action)).toEqual({
         isLoading: false,
-        errors: [],
+        error: {},
         authInfo: {},
       });
     });
