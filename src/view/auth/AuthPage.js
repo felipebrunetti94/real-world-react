@@ -9,7 +9,7 @@ const AuthPage = ({
   showUsername = false,
   onSubmit,
   isLoading,
-  errors,
+  error,
   updateAuthInfo,
   authInfo,
 }) => {
@@ -29,7 +29,7 @@ const AuthPage = ({
           <div className="col-md-6 offset-md-3 col-xs-12">
             <h1 className="text-xs-center">{title}</h1>
             <p className="text-xs-center">{getLink()}</p>
-            <Errors error={errors} />
+            <Errors error={error} />
             <form onSubmit={handleSubmit}>
               {showUsername && (
                 <fieldset className="form-group">
@@ -87,12 +87,10 @@ AuthPage.propTypes = {
   showUsername: PropTypes.bool,
   onSubmit: PropTypes.func,
   isLoading: PropTypes.bool,
-  errors: PropTypes.arrayOf(
-    PropTypes.shape({
-      message: PropTypes.string,
-      code: PropTypes.string,
-    })
-  ),
+  error: PropTypes.shape({
+    message: PropTypes.string,
+    details: PropTypes.arrayOf(PropTypes.string),
+  }),
 };
 
 export default AuthPage;
