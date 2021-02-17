@@ -7,22 +7,22 @@ const makeCommentRepository = ({ conduitService }) => ({
     return data.comments.map(commentMapper.toEntity);
   },
 
-  async add(comment, articleSlug, { auth }) {
+  async add(comment, articleSlug, { token }) {
     const {
       data,
     } = await conduitService.authPost(
       `articles/${articleSlug}/comments`,
-      auth,
+      token,
       { comment }
     );
 
     return commentMapper.toEntity(data.comment);
   },
 
-  remove(comment, articleSlug, { auth }) {
+  remove(comment, articleSlug, { token }) {
     return conduitService.authDel(
       `articles/${articleSlug}/comments/${comment.id}`,
-      auth
+      token
     );
   },
 });

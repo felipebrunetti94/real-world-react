@@ -26,10 +26,10 @@ const errorWrapper = (request) => async (...args) => {
 
 /**
  * @param {any} options
- * @param {string} auth
+ * @param {string} token
  */
-const withAuth = (options = {}, auth) => {
-  if (auth) {
+const withAuth = (options = {}, token) => {
+  if (token) {
     return options;
   }
 
@@ -37,7 +37,7 @@ const withAuth = (options = {}, auth) => {
     ...options,
     headers: {
       ...options.headers,
-      Authorization: `Token ${auth}`,
+      Authorization: `Token ${token}`,
     },
   };
 };
@@ -53,10 +53,10 @@ const del = errorWrapper(axios.delete);
  * @property {(url: string) => Promise<any>} get
  * @property {(url: string, options: any) => Promise<any>} delete
  * @property {(url: string, data: any) => Promise<any>} put
- * @property {(url: string, auth: string, data: any, options: any) => Promise<any>} authPost
- * @property {(url: string, auth: string, options: any) => Promise<any>} authGet
- * @property {(url: string, auth: string, data: any, options: any) => Promise<any>} authPut
- * @property {(url: string, auth: string, options: any) => Promise<any>} authDelete
+ * @property {(url: string, token: string, data: any, options: any) => Promise<any>} authPost
+ * @property {(url: string, token: string, options: any) => Promise<any>} authGet
+ * @property {(url: string, token: string, data: any, options: any) => Promise<any>} authPut
+ * @property {(url: string, token: string, options: any) => Promise<any>} authDelete
  */
 const conduitService = {
   post,
@@ -67,20 +67,20 @@ const conduitService = {
 
   delete: del,
 
-  async authPost(url, auth, data = {}, options) {
-    return await post(url, data, withAuth(options, auth));
+  async authPost(url, token, data = {}, options) {
+    return await post(url, data, withAuth(options, token));
   },
 
-  async authGet(url, auth, options) {
-    return await get(url, withAuth(options, auth));
+  async authGet(url, token, options) {
+    return await get(url, withAuth(options, token));
   },
 
-  async authPut(url, auth, data = {}, options) {
-    return await put(url, data, withAuth(options, auth));
+  async authPut(url, token, data = {}, options) {
+    return await put(url, data, withAuth(options, token));
   },
 
-  async authDelete(url, auth, options) {
-    return await del(url, withAuth(options, auth));
+  async authDelete(url, token, options) {
+    return await del(url, withAuth(options, token));
   },
 };
 

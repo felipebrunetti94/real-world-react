@@ -1,5 +1,3 @@
-// @ts-check
-
 import { UserRepository } from "../../domain/user";
 import { ConduitService } from "../conduit/conduitService";
 
@@ -19,19 +17,20 @@ const makeUserRepository = ({ conduitService }) => ({
   },
 
   async authBy(userInfo) {
+    console.log("repository", userInfo);
     const { data } = await conduitService.post("users/login", {
       user: userInfo,
     });
     return data;
   },
 
-  async getByToken({ auth }) {
-    const { data } = await conduitService.authGet("user", auth);
+  async getByToken({ token }) {
+    const { data } = await conduitService.authGet("user", token);
     return data;
   },
 
-  async update(updadatedUser, { auth }) {
-    const { data } = await conduitService.authPut("user", auth, {
+  async update(updadatedUser, { token }) {
+    const { data } = await conduitService.authPut("user", token, {
       user: updadatedUser,
     });
     return data;

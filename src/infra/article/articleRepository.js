@@ -1,28 +1,27 @@
 import articleMapper from "./articleMapper";
 
 const makeArticleRepository = ({ conduitService }) => ({
-  async getGlobalFeed({ auth }) {
-    const { data } = await conduitService.authGet("articles", auth);
-    console.log(data);
+  async getGlobalFeed({ token }) {
+    const { data } = await conduitService.authGet("articles", token);
     return data.articles.map(articleMapper.toEntity);
   },
 
-  async fromSlug(article, { auth }) {
+  async fromSlug(article, { token }) {
     const { data } = await conduitService.authGet(
       `articles/${article.slug}`,
-      auth
+      token
     );
     return articleMapper.toEntity(data.article);
   },
 
-  async remove(article, { auth }) {
-    await conduitService.authDelete(`articles/${article.slug}`, auth);
+  async remove(article, { token }) {
+    await conduitService.authDelete(`articles/${article.slug}`, token);
   },
 
-  async update(article, { auth }, editedArticle) {
+  async update(article, { token }, editedArticle) {
     const { data } = await conduitService.authUpdate(
       `articles/${article.slug}`,
-      auth,
+      token,
       {
         article: editedArticle,
       }
@@ -30,21 +29,21 @@ const makeArticleRepository = ({ conduitService }) => ({
     return data.article;
   },
 
-  async fromTag(tag, { auth }) {
-    const { data } = await conduitService.authGet("articles", auth, {
+  async fromTag(tag, { token }) {
+    const { data } = await conduitService.authGet("articles", token, {
       params: { tag },
     });
 
     return data.articles.map(articleMapper.toEntity);
   },
 
-  async fromUser({ auth }) {
-    const articles = await conduitService.get("articles/feed", auth);
-    return articles;
+  async fromUser({ token }) {
+    const { data } = await conduitService.get("articles/feed", token);
+    return data.articles.map(articleMapper.toEntity);
   },
 
-  async fromAuthor(author, { auth }) {
-    const { data } = await conduitService.authGet("articles", auth, {
+  async fromAuthor(author, { token }) {
+    const { data } = await conduitService.authGet("articles", token, {
       params: { author: author.username },
     });
 
