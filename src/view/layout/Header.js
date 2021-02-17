@@ -9,9 +9,9 @@ const Header = () => {
     <header>
       <nav className="navbar navbar-light">
         <div className="container">
-          <a className="navbar-brand" href="index.html">
+          <NavLink className="navbar-brand" to="/">
             conduit
-          </a>
+          </NavLink>
           <ul className="nav navbar-nav pull-xs-right">
             <li className="nav-item">
               <NavLink
