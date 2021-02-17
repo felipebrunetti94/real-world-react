@@ -15,12 +15,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         isLoading: true,
-        errors: [],
+        error: [],
       };
     case AUTH.REGISTER_USER_REQUEST_ERROR:
       return {
         ...state,
-        errors: action.errors,
+        error: action.error,
         isLoading: false,
       };
     case AUTH.LOGIN_USER_REQUEST_ERROR:
@@ -30,7 +30,7 @@ const reducer = (state, action) => {
           ...state.authInfo,
           password: "",
         },
-        errors: action.errors,
+        error: action.error,
         isLoading: false,
       };
     case AUTH.LOGIN_USER_REQUEST_SUCCESS:
@@ -38,9 +38,14 @@ const reducer = (state, action) => {
       return {
         ...state,
         authInfo: {},
-        errors: [],
+        error: [],
         isLoading: false,
         user: action.user,
+      };
+    case AUTH.SIGN_OUT:
+      return {
+        ...state,
+        user: {},
       };
     default:
       return state;

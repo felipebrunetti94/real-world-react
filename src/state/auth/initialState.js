@@ -1,8 +1,8 @@
 const initialState = {
   authInfo: {},
-  errors: [],
+  error: {},
   isLoading: false,
-  user: null,
+  user: {},
 };
 
 export default initialState;
