@@ -2,14 +2,20 @@ import ArticlePreview from "./ArticlePreview";
 
 const ArticleList = ({ articles, isLoading, error }) => {
   if (error) {
-    return "Error while loading articles.";
+    return <div className="article-preview">Error while loading articles.</div>;
   }
 
   if (isLoading) {
-    return "Loading articles...";
+    return <div className="article-preview">Loading articles...</div>;
   }
 
-  return articles.map((article) => <ArticlePreview article={article} />);
+  if (!articles.length) {
+    return <div className="article-preview">No articles are here... yet.</div>;
+  }
+
+  return articles.map((article) => (
+    <ArticlePreview key={article.slug} article={article} />
+  ));
 };
 
 export default ArticleList;

@@ -7,7 +7,7 @@ import Feed from "../article/Feed";
 import * as container from "../../container";
 
 const HomePage = () => {
-  const { user } = useAuth();
+  const { user, loggedIn } = useAuth();
   const {
     feed,
     tags,

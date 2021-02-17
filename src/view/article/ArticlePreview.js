@@ -1,14 +1,9 @@
 import { Link } from "react-router-dom";
+import FormattedDate from "../date/FormattedDate";
+import FavoriteButton from "./FavoriteButton";
 
 const ArticlePreview = ({ article }) => {
-  const {
-    author,
-    createdAt,
-    favoritesCount,
-    slug,
-    title,
-    description,
-  } = article;
+  const { author, createdAt, slug, title, description } = article;
   return (
     <div className="article-preview">
       <div className="article-meta">
@@ -19,11 +14,11 @@ const ArticlePreview = ({ article }) => {
           <Link to={`/@${author.username}`} className="author">
             {author.username}
           </Link>
-          <span className="date">{createdAt}</span>
+          <span className="date">
+            <FormattedDate date={createdAt} />
+          </span>
         </div>
-        <button className="btn btn-outline-primary btn-sm pull-xs-right">
-          <i className="ion-heart"></i> {favoritesCount}
-        </button>
+        <FavoriteButton author={author} />
       </div>
       <Link to={`/article/${slug}`} className="preview-link">
         <h1>{title}</h1>
