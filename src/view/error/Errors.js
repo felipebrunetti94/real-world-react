@@ -1,6 +1,5 @@
 const Errors = ({ error = {} }) => {
   if (error.details) {
-    console.log(error.details);
     return (
       <ul className="error-messages" data-testid="errors">
         {error.details.map((detail) => (
