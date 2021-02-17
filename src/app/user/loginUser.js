@@ -17,7 +17,7 @@ import { User, UserAuthInfo, UserRepository } from "../../domain/user";
  * @param {Dependencies} dependencies
  * @returns {(info: UserAuthInfo, callback: Callback) => void}
  */
-const makeSigninUser = ({ userRepository }) => {
+const makeLoginUser = ({ userRepository }) => {
   return async (userAuthInfo, { onSuccess, onError }) => {
     try {
       const user = await userRepository.authBy(userAuthInfo);
@@ -27,4 +27,4 @@ const makeSigninUser = ({ userRepository }) => {
     }
   };
 };
-export default makeSigninUser;
+export default makeLoginUser;
