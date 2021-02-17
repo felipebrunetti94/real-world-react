@@ -1,13 +1,28 @@
-// @ts-check
-
 import Axios from "axios";
 
-const CONDUIT_URL = `${process.env.CONDUIT_URL}` || "";
+const CONDUIT_URL = `${process.env.REACT_APP_CONDUIT_URL}` || "kkkkkk";
 
 const axios = Axios.create({
   baseURL: CONDUIT_URL,
   headers: { "Content-Type": "application/json; charset=utf-8" },
 });
+
+const extractErrors = (resError) => {
+  if (!resError.response) {
+    return resError;
+  }
+
+  const error = new Error();
+  return (error.errors = resError.response.data.errors);
+};
+
+const errorWrapper = (request) => async (...args) => {
+  try {
+    return await request(...args);
+  } catch (error) {
+    return extractErrors(error);
+  }
+};
 
 /**
  * @param {any} options
@@ -27,6 +42,11 @@ const withAuth = (options = {}, auth) => {
   };
 };
 
+const get = errorWrapper(axios.get);
+const post = errorWrapper(axios.post);
+const put = errorWrapper(axios.put);
+const del = errorWrapper(axios.delete);
+
 /**
  * @typedef ConduitService
  * @property {(url: string, data: any) => Promise<any>} post
@@ -39,36 +59,28 @@ const withAuth = (options = {}, auth) => {
  * @property {(url: string, auth: string, options: any) => Promise<any>} authDelete
  */
 const conduitService = {
-  async post(url, data) {
-    return await axios.post(url, data);
-  },
+  post,
 
-  async get(url) {
-    return await axios.get(url);
-  },
+  get,
 
-  async delete(url, options) {
-    return await axios.delete(url, options);
-  },
+  put,
 
-  async put(url, data) {
-    return await axios.put(url, data);
-  },
+  delete: del,
 
   async authPost(url, auth, data = {}, options) {
-    return await axios.post(url, data, withAuth(options, auth));
+    return await post(url, data, withAuth(options, auth));
   },
 
   async authGet(url, auth, options) {
-    return await axios.get(url, withAuth(options, auth));
+    return await get(url, withAuth(options, auth));
   },
 
   async authPut(url, auth, data = {}, options) {
-    return await axios.put(url, data, withAuth(options, auth));
+    return await put(url, data, withAuth(options, auth));
   },
 
   async authDelete(url, auth, options) {
-    return await axios.delete(url, withAuth(options, auth));
+    return await del(url, withAuth(options, auth));
   },
 };
 
