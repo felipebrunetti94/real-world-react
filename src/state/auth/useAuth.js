@@ -42,6 +42,7 @@ export const AuthProvider = ({
 
     return {
       ...state,
+      user: state.user || {},
       updateAuthInfo,
       onRegisterUser,
       onUserLogin,
