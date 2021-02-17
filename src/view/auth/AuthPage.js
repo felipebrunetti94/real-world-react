@@ -29,7 +29,7 @@ const AuthPage = ({
           <div className="col-md-6 offset-md-3 col-xs-12">
             <h1 className="text-xs-center">{title}</h1>
             <p className="text-xs-center">{getLink()}</p>
-            <Errors errors={errors} />
+            <Errors error={errors} />
             <form onSubmit={handleSubmit}>
               {showUsername && (
                 <fieldset className="form-group">
