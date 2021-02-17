@@ -16,9 +16,12 @@ describe("State :: Auth :: reducer", () => {
   describe("when fetch articles feed request", () => {
     it("enable loading", () => {
       const state = {};
-      const action = { type: HOME.FETCH_ARTICLES_FEED_REQUEST };
+      const action = { type: HOME.FETCH_TAGS_REQUEST, tag: "tag" };
       expect(reducer(state, action)).toEqual({
         isFeedLoading: true,
+        tab: "TAG",
+        selectedTag: "tag",
+        feedError: null,
       });
     });
   });
@@ -29,6 +32,8 @@ describe("State :: Auth :: reducer", () => {
       const action = { type: HOME.FETCH_USER_FEED_REQUEST };
       expect(reducer(state, action)).toEqual({
         isFeedLoading: true,
+        tab: "USER",
+        feedError: null,
       });
     });
   });
@@ -39,6 +44,8 @@ describe("State :: Auth :: reducer", () => {
       const action = { type: HOME.FETCH_GLOBAL_FEED_REQUEST };
       expect(reducer(state, action)).toEqual({
         isFeedLoading: true,
+        tab: "GLOBAL",
+        feedError: null,
       });
     });
   });
@@ -57,7 +64,7 @@ describe("State :: Auth :: reducer", () => {
   describe("when fetch article feed error", () => {
     it("disable loadin and update error", () => {
       const state = {};
-      const action = { type: HOME.FETCH_ARTICLES_FEED_ERROR, error: "ohno!" };
+      const action = { type: HOME.FETCH_TAG_FEED_ERROR, error: "ohno!" };
       expect(reducer(state, action)).toEqual({
         isFeedLoading: false,
         feedError: "ohno!",
@@ -94,6 +101,7 @@ describe("State :: Auth :: reducer", () => {
       expect(reducer(state, action)).toEqual({
         isTagsLoading: false,
         tags: "tags",
+        tagError: null,
       });
     });
   });
@@ -101,10 +109,11 @@ describe("State :: Auth :: reducer", () => {
   describe("when fetch articles success", () => {
     it("disable loadin and update feed", () => {
       const state = {};
-      const action = { type: HOME.FETCH_ARTICLES_FEED_SUCCESS, feed: "feed" };
+      const action = { type: HOME.FETCH_TAG_FEED_SUCCESS, feed: "feed" };
       expect(reducer(state, action)).toEqual({
         isFeedLoading: false,
         feed: "feed",
+        feedError: null,
       });
     });
   });
@@ -116,6 +125,7 @@ describe("State :: Auth :: reducer", () => {
       expect(reducer(state, action)).toEqual({
         isFeedLoading: false,
         feed: "feed",
+        feedError: null,
       });
     });
   });
@@ -127,6 +137,7 @@ describe("State :: Auth :: reducer", () => {
       expect(reducer(state, action)).toEqual({
         isFeedLoading: false,
         feed: "feed",
+        feedError: null,
       });
     });
   });

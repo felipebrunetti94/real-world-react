@@ -1,10 +1,8 @@
-import NavFeed from "./NavFeed";
 import ArticleList from "./ArticleList";
 
-const Feed = ({ feed, navItems, isLoading, error }) => {
+const Feed = ({ feed, isLoading, error }) => {
   return (
     <>
-      <NavFeed navItems={navItems} />
       <ArticleList articles={feed} isLoading={isLoading} error={error} />
     </>
   );

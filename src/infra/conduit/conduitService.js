@@ -37,7 +37,7 @@ const errorWrapper = (request) => async (...args) => {
  * @param {string} token
  */
 const withAuth = (options = {}, token) => {
-  if (token) {
+  if (!token) {
     return options;
   }
 

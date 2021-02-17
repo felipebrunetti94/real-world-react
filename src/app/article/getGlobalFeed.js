@@ -15,7 +15,7 @@ import { Article } from "../../domain/article";
 
 /**
  * @param {Dependencies} dependencies
- * @returns {(user: User, callback: Callback) => void}
+ * @returns {(callback: Callback) => void}
  */
 const makeGetGlobalFeed = ({ articleRepository }) => {
   return async (user, { onSuccess, onError }) => {
@@ -23,6 +23,7 @@ const makeGetGlobalFeed = ({ articleRepository }) => {
       const globalFeed = await articleRepository.getGlobalFeed(user);
       onSuccess(globalFeed);
     } catch (error) {
+      console.error(error);
       onError(error);
     }
   };

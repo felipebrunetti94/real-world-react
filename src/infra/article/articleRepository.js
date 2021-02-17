@@ -38,7 +38,7 @@ const makeArticleRepository = ({ conduitService }) => ({
   },
 
   async fromUser({ token }) {
-    const { data } = await conduitService.get("articles/feed", token);
+    const { data } = await conduitService.authGet("articles/feed", token);
     return data.articles.map(articleMapper.toEntity);
   },
 
