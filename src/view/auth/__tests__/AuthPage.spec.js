@@ -8,7 +8,7 @@ describe("View :: Auth :: AuthPage", () => {
       showUsername: true,
       onSubmit: () => {},
       isLoading: false,
-      errors: [],
+      error: {},
       updateAuthInfo: () => {},
       authInfo: {},
     };
@@ -25,7 +25,7 @@ describe("View :: Auth :: AuthPage", () => {
         showUsername: true,
         onSubmit,
         isLoading: false,
-        errors: [],
+        error: {},
         updateAuthInfo: () => {},
         authInfo,
       };
@@ -43,7 +43,7 @@ describe("View :: Auth :: AuthPage", () => {
         showUsername: true,
         onSubmit: () => {},
         isLoading: false,
-        errors: [],
+        error: {},
         updateAuthInfo,
         authInfo: {},
       };
@@ -66,7 +66,7 @@ describe("View :: Auth :: AuthPage", () => {
         showUsername: true,
         onSubmit: () => {},
         isLoading: false,
-        errors: [],
+        error: {},
         updateAuthInfo: () => {},
         authInfo: {},
       };
@@ -82,7 +82,7 @@ describe("View :: Auth :: AuthPage", () => {
         showUsername: true,
         onSubmit: () => {},
         isLoading: true,
-        errors: [],
+        error: {},
         updateAuthInfo: () => {},
         authInfo: {},
       };
@@ -93,13 +93,13 @@ describe("View :: Auth :: AuthPage", () => {
   });
 
   describe("when receive Errors", () => {
-    it("show errors list", () => {
+    it("show error list", () => {
       const props = {
         title: "test",
         showUsername: true,
         onSubmit: () => {},
         isLoading: false,
-        errors: [{ code: "1", message: "ohno!" }],
+        error: { message: "ohno!" },
         updateAuthInfo: () => {},
         authInfo: {},
       };
