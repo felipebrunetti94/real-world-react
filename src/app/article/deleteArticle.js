@@ -1,7 +1,7 @@
 const makeDeleteArticle = ({ articleRepository }) => {
-  return async (articleInfo, user { onSuccess, onError }) => {
+  return async (articleInfo, user, { onSuccess, onError }) => {
     try {
-      const article = await articleRepository.authDelete(articleInfo, user);
+      const article = await articleRepository.delete(articleInfo, user);
       onSuccess(article);
     } catch (error) {
       onError(error);
