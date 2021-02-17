@@ -7,19 +7,27 @@ const axios = Axios.create({
   headers: { "Content-Type": "application/json; charset=utf-8" },
 });
 
+const formatErrors = (errors) => {
+  return Object.keys(errors).reduce((acc, key) => {
+    return [...errors[key].map((error) => `${key}: ${error}`), ...acc];
+  }, []);
+};
+
 const extractErrors = (resError) => {
   if (!resError.response) {
     return resError;
   }
 
   const error = new Error();
-  return (error.errors = resError.response.data.errors);
+  error.details = formatErrors(resError.response.data.errors);
+  throw error;
 };
 
 const errorWrapper = (request) => async (...args) => {
   try {
     return await request(...args);
   } catch (error) {
+    console.error("RequestError", error);
     return extractErrors(error);
   }
 };
