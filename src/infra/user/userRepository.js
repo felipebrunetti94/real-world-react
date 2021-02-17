@@ -13,27 +13,27 @@ import { ConduitService } from "../conduit/conduitService";
 const makeUserRepository = ({ conduitService }) => ({
   async add(user) {
     const { data } = await conduitService.post("users", { user });
-    return data;
+    return data.user;
   },
 
   async authBy(userInfo) {
-    console.log("repository", userInfo);
     const { data } = await conduitService.post("users/login", {
       user: userInfo,
     });
-    return data;
+
+    return data.user;
   },
 
   async getByToken({ token }) {
     const { data } = await conduitService.authGet("user", token);
-    return data;
+    return data.user;
   },
 
   async update(updadatedUser, { token }) {
     const { data } = await conduitService.authPut("user", token, {
       user: updadatedUser,
     });
-    return data;
+    return data.user;
   },
 });
 
