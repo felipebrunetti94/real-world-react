@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import FormattedDate from "../date/FormattedDate";
 import FavoriteButton from "./FavoriteButton";
 
-const ArticlePreview = ({ article }) => {
+const ArticlePreview = ({ article, onToggleLike }) => {
   const { author, createdAt, slug, title, description } = article;
+
   return (
     <div className="article-preview">
       <div className="article-meta">
@@ -18,7 +19,7 @@ const ArticlePreview = ({ article }) => {
             <FormattedDate date={createdAt} />
           </span>
         </div>
-        <FavoriteButton author={author} />
+        <FavoriteButton article={article} onToggleLike={onToggleLike} />
       </div>
       <Link to={`/article/${slug}`} className="preview-link">
         <h1>{title}</h1>

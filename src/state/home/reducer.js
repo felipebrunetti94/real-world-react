@@ -65,6 +65,31 @@ const reducer = (state, action) => {
         feed: action.feed,
         feedError: null,
       };
+    case HOME.TOGGLE_LIKE_REQUEST:
+      return {
+        ...state,
+        feed: state.feed.map((article) =>
+          article.slug === action.article.slug
+            ? { ...article, isSubmiting: true }
+            : article
+        ),
+      };
+    case HOME.TOGGLE_LIKE_ERROR:
+      return {
+        ...state,
+        feed: state.feed.map((article) =>
+          article.slug === action.article.slug
+            ? { ...article, isSubmiting: false }
+            : article
+        ),
+      };
+    case HOME.TOGGLE_LIKE_SUCCESS:
+      return {
+        ...state,
+        feed: state.feed.map((article) =>
+          article.slug === action.article.slug ? action.article : article
+        ),
+      };
     default:
       return state;
   }

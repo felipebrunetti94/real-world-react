@@ -24,7 +24,7 @@ export const AuthProvider = ({ children, registerUser, loginUser, cache }) => {
 
   useEffect(() => {
     cache.set(AUTH_KEY, state.user);
-  }, [state, cache]);
+  }, [state.user, cache]);
 
   const value = useMemo(() => {
     const onRegisterUser = (authInfo) => {

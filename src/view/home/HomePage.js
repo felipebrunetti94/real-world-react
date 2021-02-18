@@ -26,6 +26,7 @@ const HomePage = () => {
     isFeedLoading,
     feedError,
     tagError,
+    onToggleLike,
   } = useHome({ ...container, user });
   return (
     <div className="home-page">
@@ -61,7 +62,12 @@ const HomePage = () => {
                 )}
               </ul>
             </div>
-            <Feed feed={feed} isLoading={isFeedLoading} error={feedError} />
+            <Feed
+              feed={feed}
+              isLoading={isFeedLoading}
+              error={feedError}
+              onToggleLike={onToggleLike}
+            />
           </div>
 
           <div className="col-md-3">

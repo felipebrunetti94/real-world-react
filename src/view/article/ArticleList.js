@@ -1,6 +1,6 @@
 import ArticlePreview from "./ArticlePreview";
 
-const ArticleList = ({ articles, isLoading, error }) => {
+const ArticleList = ({ articles, isLoading, error, onToggleLike }) => {
   if (error) {
     return <div className="article-preview">Error while loading articles.</div>;
   }
@@ -14,7 +14,11 @@ const ArticleList = ({ articles, isLoading, error }) => {
   }
 
   return articles.map((article) => (
-    <ArticlePreview key={article.slug} article={article} />
+    <ArticlePreview
+      key={article.slug}
+      article={article}
+      onToggleLike={onToggleLike}
+    />
   ));
 };
 

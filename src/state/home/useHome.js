@@ -14,6 +14,7 @@ const useHome = ({
   getGlobalFeed,
   getTagFeed,
   getUserFeed,
+  toggleLikeArticle,
   user = {},
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -74,6 +75,16 @@ const useHome = ({
           dispatch({ type: HOME.FETCH_GLOBAL_FEED_SUCCESS, feed }),
         onError: (error) =>
           dispatch({ type: HOME.FETCH_GLOBAL_FEED_ERROR, error }),
+      });
+    },
+    onToggleLike: (article) => {
+      dispatch({ type: HOME.TOGGLE_LIKE_REQUEST, article });
+
+      return toggleLikeArticle(article, user, {
+        onSuccess: (editedArticle) =>
+          dispatch({ type: HOME.TOGGLE_LIKE_SUCCESS, article: editedArticle }),
+        onError: (article) =>
+          dispatch({ type: HOME.TOGGLE_LIKE_SUCCESS, article }),
       });
     },
   };

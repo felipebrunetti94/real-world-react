@@ -8,6 +8,7 @@ import makeGetPopularTags from "./app/tag/getPopularTags";
 import makeGetGlobalFeed from "./app/article/getGlobalFeed";
 import makeGetTagFeed from "./app/article/getTagFeed";
 import makeGetUserFeed from "./app/article/getUserFeed";
+import makeToggleLikeArticle from "./app/article/toggleLikeArticle";
 
 // -- INFRA --/
 const userRepository = makeUserRepository({ conduitService });
@@ -21,3 +22,4 @@ export const getPopularTags = makeGetPopularTags({ tagRepository });
 export const getGlobalFeed = makeGetGlobalFeed({ articleRepository });
 export const getTagFeed = makeGetTagFeed({ articleRepository });
 export const getUserFeed = makeGetUserFeed({ articleRepository });
+export const toggleLikeArticle = makeToggleLikeArticle({ articleRepository });

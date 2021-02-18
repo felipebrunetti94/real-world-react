@@ -49,6 +49,23 @@ const makeArticleRepository = ({ conduitService }) => ({
 
     return data.articles.map(articleMapper.toEntity);
   },
+
+  async like({ slug }, { token }) {
+    const { data } = await conduitService.authPost(
+      `articles/${slug}/favorite`,
+      token
+    );
+
+    return articleMapper.toEntity(data.article);
+  },
+
+  async disLike({ slug }, { token }) {
+    const { data } = await conduitService.authDelete(
+      `articles/${slug}/favorite`,
+      token
+    );
+    return articleMapper.toEntity(data.article);
+  },
 });
 
 export default makeArticleRepository;
