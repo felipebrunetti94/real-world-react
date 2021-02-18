@@ -3,12 +3,6 @@ import * as HOME from "./types";
 import reducer from "./reducer";
 import initialState from "./initialState";
 
-const TABS = {
-  GLOBAL: "GLOBAL",
-  USER: "USER",
-  TAG: "TAG",
-};
-
 const useHome = ({
   getPopularTags,
   getGlobalFeed,
@@ -18,25 +12,25 @@ const useHome = ({
   user = {},
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const fetchFeedAndTags = () => {
-    dispatch({ type: HOME.FETCH_ALL_REQUEST });
-    getPopularTags({
-      onSuccess: (tags) =>
-        dispatch({ type: HOME.FETCH_TAGS_REQUEST_SUCCESS, tags }),
-      onError: (error) =>
-        dispatch({ type: HOME.FETCH_TAGS_REQUEST_ERROR, error }),
-    });
-    getGlobalFeed(user, {
-      onSuccess: (feed) =>
-        dispatch({ type: HOME.FETCH_GLOBAL_FEED_SUCCESS, feed }),
-      onError: (error) =>
-        dispatch({ type: HOME.FETCH_GLOBAL_FEED_ERROR, error }),
-    });
-  };
 
   useEffect(() => {
+    const fetchFeedAndTags = () => {
+      dispatch({ type: HOME.FETCH_ALL_REQUEST });
+      getPopularTags({
+        onSuccess: (tags) =>
+          dispatch({ type: HOME.FETCH_TAGS_REQUEST_SUCCESS, tags }),
+        onError: (error) =>
+          dispatch({ type: HOME.FETCH_TAGS_REQUEST_ERROR, error }),
+      });
+      getGlobalFeed(user, {
+        onSuccess: (feed) =>
+          dispatch({ type: HOME.FETCH_GLOBAL_FEED_SUCCESS, feed }),
+        onError: (error) =>
+          dispatch({ type: HOME.FETCH_GLOBAL_FEED_ERROR, error }),
+      });
+    };
     fetchFeedAndTags();
-  }, []);
+  }, [getGlobalFeed, getPopularTags, dispatch, user]);
 
   return {
     isFeedLoading: state.isFeedLoading,

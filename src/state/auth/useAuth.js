@@ -63,7 +63,7 @@ export const AuthProvider = ({ children, registerUser, loginUser, cache }) => {
       onUserLogin,
       onSignOut,
     };
-  }, [state, dispatch, registerUser, loginUser]);
+  }, [state, dispatch, registerUser, loginUser, cache]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
