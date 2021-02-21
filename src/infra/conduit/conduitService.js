@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-const CONDUIT_URL = `${process.env.REACT_APP_CONDUIT_URL}` || "kkkkkk";
+const CONDUIT_URL = `${process.env.REACT_APP_CONDUIT_URL}` || "";
 
 const axios = Axios.create({
   baseURL: CONDUIT_URL,
