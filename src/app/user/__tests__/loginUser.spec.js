@@ -1,6 +1,6 @@
-import makeSigninUSer from "../signinUser";
+import makeLoginUser from "../loginUser";
 
-describe("App :: User :: signinUser", () => {
+describe("App :: User :: loginUser", () => {
   let registerUSer;
   let mockUserRepository;
   const userAuth = "userAuth";
@@ -10,7 +10,7 @@ describe("App :: User :: signinUser", () => {
       authBy: jest.fn(),
     };
 
-    registerUSer = makeSigninUSer({
+    registerUSer = makeLoginUser({
       userRepository: mockUserRepository,
     });
 
@@ -24,7 +24,7 @@ describe("App :: User :: signinUser", () => {
       mockUserRepository = {
         authBy: jest.fn(() => Promise.resolve("signedUser")),
       };
-      registerUSer = makeSigninUSer({ userRepository: mockUserRepository });
+      registerUSer = makeLoginUser({ userRepository: mockUserRepository });
     });
 
     it("call onSuccess callback with the signed user", async () => {
@@ -43,7 +43,7 @@ describe("App :: User :: signinUser", () => {
       mockUserRepository = {
         authBy: jest.fn(() => Promise.reject(new Error("error!"))),
       };
-      registerUSer = makeSigninUSer({ userRepository: mockUserRepository });
+      registerUSer = makeLoginUser({ userRepository: mockUserRepository });
     });
 
     it("call onError callback with the error", async () => {
