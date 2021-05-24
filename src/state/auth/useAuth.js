@@ -1,19 +1,11 @@
-import {
-  useReducer,
-  createContext,
-  useContext,
-  useMemo,
-  useEffect,
-} from "react";
+import { useReducer, useContext, useMemo, useEffect } from "react";
 import initialState from "./initialState";
 import * as AUTH from "./types";
 import reducer from "./reducer";
 
-const AuthContext = createContext(null);
-
 const AUTH_KEY = "AUTH";
 
-export const AuthProvider = ({ children, registerUser, loginUser, cache }) => {
+const useAuth = ({ registerUser, loginUser, cache }) => {
   const [state, dispatch] = useReducer(reducer, initialState, (init) => {
     const stored = cache.get(AUTH_KEY);
     if (stored) {
@@ -65,9 +57,7 @@ export const AuthProvider = ({ children, registerUser, loginUser, cache }) => {
     };
   }, [state, dispatch, registerUser, loginUser, cache]);
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return value;
 };
-
-const useAuth = () => useContext(AuthContext);
 
 export default useAuth;

@@ -1,4 +1,4 @@
-import { AuthProvider } from "../state/auth/useAuth";
+import AuthProvider from "../state/auth/context";
 
 const Provider = ({ cache, container, children }) => {
   const { registerUser, loginUser } = container;
