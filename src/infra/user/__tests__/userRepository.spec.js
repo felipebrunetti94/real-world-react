@@ -5,7 +5,7 @@ describe("Infra :: User :: userRepository", () => {
   let conduitService;
   const successResponse = { data: { user: "user" } };
   const errorResponse = { errors: ["nope!", "ohno!"] };
-  const user = { auth: "auth" };
+  const user = { token: "token" };
 
   describe("#add", () => {
     it("uses the conduit service to make the request", async () => {
@@ -26,9 +26,7 @@ describe("Infra :: User :: userRepository", () => {
         };
         userRepository = makeUserRepository({ conduitService });
 
-        return expect(userRepository.add("user")).resolves.toEqual({
-          user: "user",
-        });
+        return expect(userRepository.add("user")).resolves.toEqual("user");
       });
     });
 
@@ -65,9 +63,9 @@ describe("Infra :: User :: userRepository", () => {
         };
         userRepository = makeUserRepository({ conduitService });
 
-        return expect(userRepository.authBy("userInfo")).resolves.toEqual({
-          user: "user",
-        });
+        return expect(userRepository.authBy("userInfo")).resolves.toEqual(
+          "user"
+        );
       });
     });
 
@@ -92,7 +90,7 @@ describe("Infra :: User :: userRepository", () => {
       };
       userRepository = makeUserRepository({ conduitService });
       await userRepository.getByToken(user);
-      expect(conduitService.authGet).toHaveBeenCalledWith("user", "auth");
+      expect(conduitService.authGet).toHaveBeenCalledWith("user", "token");
     });
 
     describe("when success", () => {
@@ -102,9 +100,7 @@ describe("Infra :: User :: userRepository", () => {
         };
         userRepository = makeUserRepository({ conduitService });
 
-        return expect(userRepository.getByToken(user)).resolves.toEqual({
-          user: "user",
-        });
+        return expect(userRepository.getByToken(user)).resolves.toEqual("user");
       });
     });
 
@@ -129,7 +125,7 @@ describe("Infra :: User :: userRepository", () => {
       };
       userRepository = makeUserRepository({ conduitService });
       await userRepository.update("editedUser", user);
-      expect(conduitService.authPut).toHaveBeenCalledWith("user", "auth", {
+      expect(conduitService.authPut).toHaveBeenCalledWith("user", "token", {
         user: "editedUser",
       });
     });
@@ -141,9 +137,9 @@ describe("Infra :: User :: userRepository", () => {
         };
         userRepository = makeUserRepository({ conduitService });
 
-        return expect(userRepository.update("user", user)).resolves.toEqual({
-          user: "user",
-        });
+        return expect(userRepository.update("user", user)).resolves.toEqual(
+          "user"
+        );
       });
     });
 

@@ -27,9 +27,10 @@ describe("Infra :: User :: tagRepository", () => {
         };
         tagRepository = makeTagRepository({ conduitService });
 
-        return expect(tagRepository.getPopularTags()).resolves.toEqual({
-          tags: ["reactjs", "angularjs"],
-        });
+        return expect(tagRepository.getPopularTags()).resolves.toEqual([
+          "reactjs",
+          "angularjs",
+        ]);
       });
     });
 

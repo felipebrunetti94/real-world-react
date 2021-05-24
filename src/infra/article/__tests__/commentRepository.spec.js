@@ -3,7 +3,7 @@ import makeCommentRepository from "../commentRepository";
 describe("Infra :: Article :: Comment Repository", () => {
   let commentRepository;
   let conduitService;
-  const user = { auth: "auth" };
+  const user = { token: "token" };
   const successResponse = {
     data: {
       comments: [
@@ -33,7 +33,7 @@ describe("Infra :: Article :: Comment Repository", () => {
   describe("#byArticle", () => {
     it("uses the conduit service to make the request", async () => {
       conduitService = {
-        get: jest.fn().mockReturnValue(Promise.resolve(successResponse)),
+        get: jest.fn().mockResolvedValue(successResponse),
       };
       commentRepository = makeCommentRepository({ conduitService });
       await commentRepository.byArticle("article-slug");
@@ -45,7 +45,7 @@ describe("Infra :: Article :: Comment Repository", () => {
     describe("when success", () => {
       it("resolves with comments list", () => {
         conduitService = {
-          get: jest.fn().mockReturnValue(Promise.resolve(successResponse)),
+          get: jest.fn().mockResolvedValue(successResponse),
         };
         commentRepository = makeCommentRepository({ conduitService });
 
@@ -82,15 +82,13 @@ describe("Infra :: Article :: Comment Repository", () => {
     it("uses the conduit service to make the request", async () => {
       const comment = { createdAt: "", updatedAt: "" };
       conduitService = {
-        authPost: jest
-          .fn()
-          .mockReturnValue(Promise.resolve(commentSuccessResponse)),
+        authPost: jest.fn().mockResolvedValue(commentSuccessResponse),
       };
       commentRepository = makeCommentRepository({ conduitService });
       await commentRepository.add(comment, "article-slug", user);
       expect(conduitService.authPost).toHaveBeenCalledWith(
         `articles/article-slug/comments`,
-        "auth",
+        "token",
         {
           comment,
         }
@@ -102,9 +100,7 @@ describe("Infra :: Article :: Comment Repository", () => {
         const comment = { id: 1, createdAt: "1", updatedAt: "1" };
 
         conduitService = {
-          authPost: jest
-            .fn()
-            .mockReturnValue(Promise.resolve({ data: { comment } })),
+          authPost: jest.fn().mockResolvedValue({ data: { comment } }),
         };
         commentRepository = makeCommentRepository({ conduitService });
 
