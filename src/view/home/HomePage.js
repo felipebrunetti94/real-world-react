@@ -1,5 +1,5 @@
 import useHome from "../../state/home/useHome";
-import useAuth from "../../state/auth/useAuth";
+import { useAuthContext } from "../../state/auth/context";
 import Banner from "./Banner";
 import PopularTagList from "../tag/PopularTagList";
 import Feed from "../article/Feed";
@@ -12,7 +12,7 @@ const TABS = {
 };
 
 const HomePage = () => {
-  const { user, loggedIn } = useAuth();
+  const { user, loggedIn } = useAuthContext();
 
   const {
     feed,

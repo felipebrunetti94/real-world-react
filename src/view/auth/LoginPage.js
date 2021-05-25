@@ -2,10 +2,11 @@
 
 import AuthPage from "./AuthPage";
 import { Link } from "react-router-dom";
-import useAuth from "../../state/auth/useAuth";
+import { useAuthContext } from "../../state/auth/context";
 
 const LoginPage = () => {
-  const { onUserLogin, error, authInfo, updateAuthInfo, isLoading } = useAuth();
+  const { onUserLogin, error, authInfo, updateAuthInfo, isLoading } =
+    useAuthContext();
   return (
     <AuthPage
       onSubmit={onUserLogin}

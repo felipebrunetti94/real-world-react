@@ -1,5 +1,5 @@
 import { Redirect } from "react-router-dom";
-import useAuth from "../../state/auth/useAuth";
+import { useAuthContext } from "../../state/auth/context";
 
 // const RedirectButton = (Button, user) => (...props) => {
 //   if (user.token) {
@@ -10,7 +10,7 @@ import useAuth from "../../state/auth/useAuth";
 // };
 
 const RedirectButton = ({ children, isSubmiting }) => {
-  const { loggedIn } = useAuth();
+  const { loggedIn } = useAuthContext();
   if (!isSubmiting || loggedIn) {
     return <>{children}</>;
   } else {

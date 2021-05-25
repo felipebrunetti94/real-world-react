@@ -1,8 +1,8 @@
 import { Route, Redirect } from "react-router-dom";
-import useAuth from "../../state/auth/useAuth";
+import { useAuthContext } from "../../state/auth/context";
 
 const PrivateOnlyRoute = ({ component: Component, ...rest }) => {
-  const { loggedIn } = useAuth({});
+  const { loggedIn } = useAuthContext();
   return (
     <Route
       {...rest}
