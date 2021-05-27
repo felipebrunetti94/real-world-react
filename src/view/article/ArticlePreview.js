@@ -21,7 +21,11 @@ const ArticlePreview = ({ article, onToggleLike }) => {
         </div>
         <FavoriteButton article={article} onToggleLike={onToggleLike} />
       </div>
-      <Link to={`/article/${slug}`} className="preview-link">
+      <Link
+        to={`/article/${slug}`}
+        className="preview-link"
+        data-testid={`preview-${slug}`}
+      >
         <h1>{title}</h1>
         <p>{description}</p>
         <span>Read more...</span>
