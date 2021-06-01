@@ -12,16 +12,16 @@ const user = {
   email: "user email",
 };
 
-let updateUserInfo;
+let setUserInfo;
 let onEditUser;
 
 beforeEach(() => {
-  updateUserInfo = jest.fn();
+  setUserInfo = jest.fn();
   onEditUser = jest.fn();
   useAuthContext.mockReturnValue({
     user,
     isLoading: false,
-    updateUserInfo,
+    setUserInfo,
     onEditUser,
   });
 });
@@ -70,7 +70,7 @@ describe("view :: user :: Settings Page", () => {
       useAuthContext.mockReturnValue({
         user,
         isLoading: true,
-        updateUserInfo,
+        setUserInfo,
         onEditUser,
       });
 
@@ -109,30 +109,30 @@ describe("view :: user :: Settings Page", () => {
       useAuthContext.mockReturnValue({
         user,
         isLoading: false,
-        updateUserInfo,
+        setUserInfo,
         onEditUser,
       });
 
       render(<SettingsPage />);
     });
 
-    it("calls updateUserInfo with key image and value", () => {
+    it("calls setUserInfo with key image and value", () => {
       fireEvent.change(screen.getByPlaceholderText("URL of profile picture"), {
         target: { value: "value" },
       });
 
-      expect(updateUserInfo).toHaveBeenCalledWith({ image: "value" });
+      expect(setUserInfo).toHaveBeenCalledWith({ image: "value" });
     });
 
-    it("calls updateUserInfo with key username and value", () => {
+    it("calls setUserInfo with key username and value", () => {
       fireEvent.change(expect(screen.getByPlaceholderText("Your Name")), {
         target: { value: "value" },
       });
 
-      expect(updateUserInfo).toHaveBeenCalledWith({ username: "value" });
+      expect(setUserInfo).toHaveBeenCalledWith({ username: "value" });
     });
 
-    it("calls updateUserInfo with key bio and value", () => {
+    it("calls setUserInfo with key bio and value", () => {
       fireEvent.change(
         expect(screen.getByPlaceholderText("Short bio about you")),
         {
@@ -140,23 +140,23 @@ describe("view :: user :: Settings Page", () => {
         }
       );
 
-      expect(updateUserInfo).toHaveBeenCalledWith({ bio: "value" });
+      expect(setUserInfo).toHaveBeenCalledWith({ bio: "value" });
     });
 
-    it("calls updateUserInfo with key password and value", () => {
+    it("calls setUserInfo with key password and value", () => {
       fireEvent.change(expect(screen.getByPlaceholderText("Password")), {
         target: { value: "value" },
       });
 
-      expect(updateUserInfo).toHaveBeenCalledWith({ password: "value" });
+      expect(setUserInfo).toHaveBeenCalledWith({ password: "value" });
     });
 
-    it("calls updateUserInfo with key email and value", () => {
+    it("calls setUserInfo with key email and value", () => {
       fireEvent.change(expect(screen.getByPlaceholderText("Email")), {
         target: { value: "value" },
       });
 
-      expect(updateUserInfo).toHaveBeenCalledWith({ email: "value" });
+      expect(setUserInfo).toHaveBeenCalledWith({ email: "value" });
     });
   });
 });

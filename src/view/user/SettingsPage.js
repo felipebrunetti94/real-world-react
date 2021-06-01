@@ -1,11 +1,11 @@
 import { useAuthContext } from "../../state/auth/context";
 
 const SettingsPage = () => {
-  const { user, isLoading, updateUserInfo, onEditUser } = useAuthContext();
+  const { user, isLoading, setUserInfo, onEditUser } = useAuthContext();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    updateUserInfo({ [name]: value });
+    setUserInfo({ [name]: value });
   };
 
   const handleSubmit = (e) => {

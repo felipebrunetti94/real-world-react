@@ -10,6 +10,20 @@ const reducer = (state, action) => {
           ...action.authInfo,
         },
       };
+    case AUTH.SET_USER_INFO:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...action.user,
+        },
+      };
+    case AUTH.EDIT_USER_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        error: {},
+      };
     case AUTH.LOGIN_USER_REQUEST:
     case AUTH.REGISTER_USER_REQUEST:
       return {
@@ -17,6 +31,7 @@ const reducer = (state, action) => {
         isLoading: true,
         error: {},
       };
+    case AUTH.EDIT_USER_REQUEST_ERROR:
     case AUTH.REGISTER_USER_REQUEST_ERROR:
       return {
         ...state,
@@ -39,6 +54,12 @@ const reducer = (state, action) => {
         ...state,
         authInfo: {},
         error: {},
+        isLoading: false,
+        user: action.user,
+      };
+    case AUTH.EDIT_USER_REQUEST_SUCCESS:
+      return {
+        ...state,
         isLoading: false,
         user: action.user,
       };

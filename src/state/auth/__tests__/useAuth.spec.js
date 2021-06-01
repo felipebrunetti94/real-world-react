@@ -112,4 +112,56 @@ describe("State :: Auth :: useAuth", () => {
 
   describe("#onRegisterUser", () => {});
   describe("#updateAuthInfo", () => {});
+
+  describe("when calls setUserInfo", () => {
+    it("should update user", () => {
+      const { result } = renderHook(() =>
+        useAuth({ registerUser, loginUser, cache })
+      );
+
+      expect(result.current.user).toEqual({});
+
+      act(() => {
+        result.current.setUserInfo({ test: "test" });
+      });
+
+      expect(result.current.user).toEqual({ test: "test" });
+    });
+  });
+
+  describe("#onEditUser", () => {
+    describe("on Success", () => {
+      it("should update user", () => {
+        const onEditUserMock = jest.fn((_, { onSuccess }) =>
+          onSuccess({ username: "testuser" })
+        );
+        const { result } = renderHook(() =>
+          useAuth({ registerUser, loginUser, cache, editUser: onEditUserMock })
+        );
+
+        expect(result.current.user).toEqual({});
+
+        act(() => {
+          result.current.onEditUser();
+        });
+
+        expect(result.current.user).toEqual({ username: "testuser" });
+      });
+    });
+
+    describe("on Error", () => {
+      it("should update error", () => {
+        const onEditUserMock = jest.fn((_, { onError }) => onError("ohno!"));
+        const { result } = renderHook(() =>
+          useAuth({ registerUser, loginUser, cache, editUser: onEditUserMock })
+        );
+
+        act(() => {
+          result.current.onEditUser();
+        });
+
+        expect(result.current.error).toEqual("ohno!");
+      });
+    });
+  });
 });

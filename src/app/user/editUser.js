@@ -1,3 +1,22 @@
+// @ts-check
+
+import { UserRepository, User, UserAuthInfo } from "../../domain/user/User";
+
+/**
+ * @typedef Dependencies
+ * @property {UserRepository} userRepository
+ */
+
+/**
+ * @typedef Callback
+ * @property {(user: User) => void} onSuccess
+ * @property {(error: Error) => void} onError
+ */
+
+/**
+ * @param {Dependencies} dependencies
+ * @returns {(info: UserAuthInfo, callback: Callback) => void}
+ */
 const makeEditUser =
   ({ userRepository }) =>
   async (editedUser, { onError, onSuccess }) => {

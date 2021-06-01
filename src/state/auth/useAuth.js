@@ -5,7 +5,7 @@ import reducer from "./reducer";
 
 const AUTH_KEY = "AUTH";
 
-const useAuth = ({ registerUser, loginUser, cache }) => {
+const useAuth = ({ registerUser, loginUser, editUser, cache }) => {
   const [state, dispatch] = useReducer(reducer, initialState, (init) => {
     const stored = cache.get(AUTH_KEY);
     if (stored) {
@@ -46,6 +46,20 @@ const useAuth = ({ registerUser, loginUser, cache }) => {
     cache.clear(AUTH_KEY);
   };
 
+  const setUserInfo = (user) => {
+    dispatch({ type: AUTH.SET_USER_INFO, user });
+  };
+
+  const onEditUser = () => {
+    dispatch({ type: AUTH.EDIT_USER_REQUEST });
+    return editUser(state.user, {
+      onSuccess: (user) =>
+        dispatch({ type: AUTH.EDIT_USER_REQUEST_SUCCESS, user }),
+      onError: (error) =>
+        dispatch({ type: AUTH.EDIT_USER_REQUEST_ERROR, error }),
+    });
+  };
+
   return {
     ...state,
     loggedIn: !!state.user.token,
@@ -53,6 +67,8 @@ const useAuth = ({ registerUser, loginUser, cache }) => {
     onRegisterUser,
     onUserLogin,
     onSignOut,
+    onEditUser,
+    setUserInfo,
   };
 };
 
