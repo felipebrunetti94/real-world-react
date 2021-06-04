@@ -8,6 +8,14 @@
  */
 
 /**
+ * @typedef UserInfo
+ * @property {string} email
+ * @property {string} username
+ * @property {string} bio
+ * @property {string?} image
+ */
+
+/**
  * @typedef UserAuthInfo
  * @property {string?} username
  * @property {string?} email
@@ -18,7 +26,7 @@
  * @typedef UserRepository
  * @property {(userInfo: UserAuthInfo) => Promise<User>} add
  * @property {(userInfo: UserAuthInfo) => Promise<User>} authBy
- * @property {(userInfo: UserAuthInfo) => Promise<User>} update
+ * @property {(updatedUser: UserInfo, token: string) => Promise<User>} update
  */
 
 export default {};

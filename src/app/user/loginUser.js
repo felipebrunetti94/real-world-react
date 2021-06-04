@@ -1,6 +1,6 @@
 // @ts-check
 
-import { User, UserAuthInfo, UserRepository } from "../../domain/user";
+import { User, UserAuthInfo, UserRepository } from "../../domain/user/User";
 
 /**
  * @typedef Dependencies

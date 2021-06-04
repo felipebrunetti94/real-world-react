@@ -1,4 +1,4 @@
-import { UserRepository } from "../../domain/user";
+import { UserRepository } from "../../domain/user/User";
 import { ConduitService } from "../conduit/conduitService";
 
 /**
@@ -29,7 +29,7 @@ const makeUserRepository = ({ conduitService }) => ({
     return data.user;
   },
 
-  async update(updadatedUser, { token }) {
+  async update(updadatedUser, token) {
     const { data } = await conduitService.authPut("user", token, {
       user: updadatedUser,
     });
