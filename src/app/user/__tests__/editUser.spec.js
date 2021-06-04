@@ -2,7 +2,7 @@ import makeEditUser from "../editUser";
 
 describe("App :: User :: editUser", () => {
   let onSuccess, onError, mockUserRepository, editUser;
-  const editedUser = "editedUser";
+  const user = { token: "tokenMock", editedUser: "editedUser" };
 
   beforeEach(() => {
     mockUserRepository = {
@@ -16,9 +16,12 @@ describe("App :: User :: editUser", () => {
   });
 
   it("passes the data to the user repository", async () => {
-    await editUser(editedUser, { onSuccess, onError });
+    await editUser(user, { onSuccess, onError });
 
-    expect(mockUserRepository.update).toBeCalledWith(editedUser);
+    expect(mockUserRepository.update).toBeCalledWith(
+      { editedUser: user.editedUser },
+      user.token
+    );
   });
 
   describe("when it succeeds", () => {
@@ -29,13 +32,13 @@ describe("App :: User :: editUser", () => {
     });
 
     it("call onSuccess callback with the updated user", async () => {
-      await editUser(editedUser, { onSuccess, onError });
+      await editUser(user, { onSuccess, onError });
 
       expect(onSuccess).toBeCalledWith("updatedUser");
     });
 
     it("don't call onError", async () => {
-      await editUser(editedUser, { onSuccess, onError });
+      await editUser(user, { onSuccess, onError });
       expect(onError).not.toBeCalled();
     });
   });
@@ -48,12 +51,12 @@ describe("App :: User :: editUser", () => {
     });
 
     it("call onError callback with the error", async () => {
-      await editUser(editedUser, { onSuccess, onError });
+      await editUser(user, { onSuccess, onError });
       expect(onError).toBeCalledWith(new Error("error!"));
     });
 
     it("don't call onSuccess", async () => {
-      await editUser(editedUser, { onSuccess, onError });
+      await editUser(user, { onSuccess, onError });
       expect(onSuccess).not.toBeCalled();
     });
   });

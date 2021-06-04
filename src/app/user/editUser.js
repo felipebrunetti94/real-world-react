@@ -15,14 +15,14 @@ import { UserRepository, User, UserAuthInfo } from "../../domain/user/User";
 
 /**
  * @param {Dependencies} dependencies
- * @returns {(info: UserAuthInfo, callback: Callback) => void}
+ * @returns {(info: User, callback: Callback) => void}
  */
 const makeEditUser =
   ({ userRepository }) =>
-  async (editedUser, { onError, onSuccess }) => {
+  async (user, { onError, onSuccess }) => {
     try {
-      const updatedUser = await userRepository.update(editedUser);
-      onSuccess(updatedUser);
+      const { token, ...editedUser } = user;
+      onSuccess(await userRepository.update(editedUser, token));
     } catch (error) {
       onError(error);
     }

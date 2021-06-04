@@ -124,7 +124,7 @@ describe("Infra :: User :: userRepository", () => {
         authPut: jest.fn().mockReturnValue(Promise.resolve(successResponse)),
       };
       userRepository = makeUserRepository({ conduitService });
-      await userRepository.update("editedUser", user);
+      await userRepository.update("editedUser", user.token);
       expect(conduitService.authPut).toHaveBeenCalledWith("user", "token", {
         user: "editedUser",
       });
@@ -137,9 +137,9 @@ describe("Infra :: User :: userRepository", () => {
         };
         userRepository = makeUserRepository({ conduitService });
 
-        return expect(userRepository.update("user", user)).resolves.toEqual(
-          "user"
-        );
+        return expect(
+          userRepository.update("user", user.token)
+        ).resolves.toEqual("user");
       });
     });
 

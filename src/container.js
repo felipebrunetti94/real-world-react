@@ -3,6 +3,7 @@ import makeUserRepository from "./infra/user/userRepository";
 import makeTagRepository from "./infra/tag/tagRepository";
 import makeArticleRepository from "./infra/article/articleRepository";
 import makeRegisterUser from "./app/user/registerUser";
+import makeEditUser from "./app/user/editUser";
 import makeLoginUser from "./app/user/loginUser";
 import makeGetPopularTags from "./app/tag/getPopularTags";
 import makeGetGlobalFeed from "./app/article/getGlobalFeed";
@@ -18,6 +19,7 @@ const articleRepository = makeArticleRepository({ conduitService });
 // -- USE CASES --/
 export const registerUser = makeRegisterUser({ userRepository });
 export const loginUser = makeLoginUser({ userRepository });
+export const editUser = makeEditUser({ userRepository });
 export const getPopularTags = makeGetPopularTags({ tagRepository });
 export const getGlobalFeed = makeGetGlobalFeed({ articleRepository });
 export const getTagFeed = makeGetTagFeed({ articleRepository });
