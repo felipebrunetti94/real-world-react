@@ -22,6 +22,7 @@
     "cy:run": "cypress run",
     "e2e": "BROWSER=none server-test start http-get://localhost:3000 cy:open",
     "e2e:ci": "BROWSER=none server-test start http-get://localhost:3000 cy:run",
+    "lint": "eslint src/**/*.js",
     "prepare": "husky install",
     "test:staged": "cross-env CI=true react-scripts test --findRelatedTests"
   },
