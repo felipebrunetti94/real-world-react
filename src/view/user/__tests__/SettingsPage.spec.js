@@ -125,7 +125,7 @@ describe("view :: user :: Settings Page", () => {
     });
 
     it("calls setUserInfo with key username and value", () => {
-      fireEvent.change(expect(screen.getByPlaceholderText("Your Name")), {
+      fireEvent.change(screen.getByPlaceholderText("Your Name"), {
         target: { value: "value" },
       });
 
@@ -133,18 +133,15 @@ describe("view :: user :: Settings Page", () => {
     });
 
     it("calls setUserInfo with key bio and value", () => {
-      fireEvent.change(
-        expect(screen.getByPlaceholderText("Short bio about you")),
-        {
-          target: { value: "value" },
-        }
-      );
+      fireEvent.change(screen.getByPlaceholderText("Short bio about you"), {
+        target: { value: "value" },
+      });
 
       expect(setUserInfo).toHaveBeenCalledWith({ bio: "value" });
     });
 
     it("calls setUserInfo with key password and value", () => {
-      fireEvent.change(expect(screen.getByPlaceholderText("Password")), {
+      fireEvent.change(screen.getByPlaceholderText("Password"), {
         target: { value: "value" },
       });
 
@@ -152,7 +149,7 @@ describe("view :: user :: Settings Page", () => {
     });
 
     it("calls setUserInfo with key email and value", () => {
-      fireEvent.change(expect(screen.getByPlaceholderText("Email")), {
+      fireEvent.change(screen.getByPlaceholderText("Email"), {
         target: { value: "value" },
       });
 
