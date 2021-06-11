@@ -1,6 +1,6 @@
 // @ts-check
-import { User } from "../../domain/user";
-import { Article } from "../../domain/article";
+import { User } from "../../domain/user/User";
+import { Article } from "../../domain/article/Article";
 
 /**
  * @typedef Callback
