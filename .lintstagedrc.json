@@ -1,7 +1,4 @@
 {
-    "**/*.js": [
-        "eslint --fix",
-        "prettier --write",
-        "npm run test:staged"
-      ]
-  }
+  "**/*.js": ["eslint --fix", "prettier --write", "npm run test:staged"],
+  "**/*.ts": ["eslint --fix", "prettier --write", "npm run test:staged"]
+}
